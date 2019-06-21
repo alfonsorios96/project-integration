@@ -2,13 +2,15 @@ import {LitElement, html} from 'lit-element';
 
 // These are the elements needed by this element.
 import {styles} from './project-integration-styles.js';
-import { fadeInTransitionPage } from './utils/project-integration-transitions.js';
+import {fadeInTransitionPage} from './utils/project-integration-transitions.js';
 
 import './pages/default-page.js';
 import './pages/home-page.js';
 import './pages/register-page.js';
 import './pages/info-page.js';
 import './pages/login-page.js';
+import './pages/modify-page.js';
+
 // import {menuIcon} from './utils/project-integration-icons.js';
 
 class ProjectIntegration extends LitElement {
@@ -20,11 +22,11 @@ class ProjectIntegration extends LitElement {
   }
 
   static get styles() {
-      return [
-          styles,
-          fadeInTransitionPage
-        ];
-    }
+    return [
+      styles,
+      fadeInTransitionPage
+    ];
+  }
 
   render() {
     return html`
@@ -42,35 +44,35 @@ class ProjectIntegration extends LitElement {
       <!-- Main content -->
       <main role="main" class="container-app main-app">
         ${
-            this._page === 'home' ?
-              html`<home-page class="page" active @page-changed="${this.changePage}"></home-page>` :
-              ''
-        }
+      this._page === 'home' ?
+        html`<home-page class="page" active @page-changed="${this.changePage}"></home-page>` :
+        ''
+      }
         ${
-            this._page === 'register' ?
-              html`<register-page class="page" active @page-changed="${this.changePage}"></register-page>` :
-              ''
-        }
+      this._page === 'register' ?
+        html`<register-page class="page" active @page-changed="${this.changePage}"></register-page>` :
+        ''
+      }
         ${
-            this._page === 'modify' ?
-              html`<modify-page class="page" active @page-changed="${this.changePage}"></modify-page>` :
-              ''
-        }
+      this._page === 'modify' ?
+        html`<modify-page class="page" active @page-changed="${this.changePage}"></modify-page>` :
+        ''
+      }
         ${
-            this._page === 'login' ?
-              html`<login-page class="page" active @page-changed="${this.changePage}"></login-page>` :
-              ''
-        }
+      this._page === 'login' ?
+        html`<login-page class="page" active @page-changed="${this.changePage}"></login-page>` :
+        ''
+      }
         ${
-            this._page === 'info' ?
-              html`<info-page class="page" active @page-changed="${this.changePage}"></info-page>` :
-              ''
-        }
+      this._page === 'info' ?
+        html`<info-page class="page" active @page-changed="${this.changePage}"></info-page>` :
+        ''
+      }
         ${
-          this._page === 'default' ?
-            html`<default-page class="page" active></default-page>` :
-            ''
-        }
+      this._page === 'default' ?
+        html`<default-page class="page" active></default-page>` :
+        ''
+      }
       </main>
       <footer class="footer-app">
         <div class="container-footer">
@@ -97,9 +99,9 @@ class ProjectIntegration extends LitElement {
   }
 
   changePage(event) {
-      const page = event.detail;
-      this._page = page;
-    }
+    const page = event.detail;
+    this._page = page;
+  }
 
   updated(changedProps) {
     if (changedProps.has('_page')) {

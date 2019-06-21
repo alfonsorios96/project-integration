@@ -9,12 +9,7 @@ import '@polymer/iron-icon/iron-icon.js';
 
 class InfoPage extends PageDM {
   static get styles() {
-      return css`
-        paper-card {
-          width: 300px;
-          margin-left: 10px;
-          margin-bottom: 5px;
-        }
+    return css`
         h2 {
           font-size: 36px;
           text-align: center;
@@ -27,10 +22,35 @@ class InfoPage extends PageDM {
           margin-bottom: 20px;
         }
       `;
-    }
+  }
 
-    render() {
-      return html`
+
+  render() {
+    return html`
+       <custom-style>
+       <style is="custom-style">
+       paper-card {
+            width: 300px;
+            margin-left: 10px;
+            margin-bottom: 5px;
+            
+            --paper-card-header: {
+              width: 100%;
+              padding-top: 120%;
+              position: relative;
+            }
+            
+            --paper-card-header-image: {
+              position: absolute;
+              top: 0;
+              left: 0;
+              bottom: 0;
+              right: 0;
+              object-fit: cover;
+            }
+        }
+</style>
+</custom-style>
       <h2>Galactin Information</h2>
       <paper-button class="info" @click="${this._backPage}">Regresar</paper-button>
         <section class="container">
@@ -44,74 +64,31 @@ class InfoPage extends PageDM {
           `)}
         </section>
       `;
-    }
+  }
 
-    static get properties() {
-      return {
-        users: Array
-      };
-    }
+  static get properties() {
+    return {
+      users: Array
+    };
+  }
 
-    constructor() {
-      super();
-      this.users = [
-        {
-          name: 'Alfonso Rios',
-          image: 'https://i.cdn.turner.com/adultswim/big/img/2018/01/09/RickMorty2_Marathon_2.jpg',
-          galaxy: 'Vía láctea',
-          planet: 'Tierra',
-          email: 'malforime@gmail.com'
-        },
-        {
-          name: 'Alfonso Rios',
-          image: 'https://i.cdn.turner.com/adultswim/big/img/2018/01/09/RickMorty2_Marathon_2.jpg',
-          galaxy: 'Vía láctea',
-          planet: 'Tierra',
-          email: 'malforime@gmail.com'
-        },
-        {
-          name: 'Alfonso Rios',
-          image: 'https://i.cdn.turner.com/adultswim/big/img/2018/01/09/RickMorty2_Marathon_2.jpg',
-          galaxy: 'Vía láctea',
-          planet: 'Tierra',
-          email: 'malforime@gmail.com'
-        },
-        {
-          name: 'Alfonso Rios',
-          image: 'https://i.cdn.turner.com/adultswim/big/img/2018/01/09/RickMorty2_Marathon_2.jpg',
-          galaxy: 'Vía láctea',
-          planet: 'Tierra',
-          email: 'malforime@gmail.com'
-        },
-        {
-          name: 'Alfonso Rios',
-          image: 'https://i.cdn.turner.com/adultswim/big/img/2018/01/09/RickMorty2_Marathon_2.jpg',
-          galaxy: 'Vía láctea',
-          planet: 'Tierra',
-          email: 'malforime@gmail.com'
-        },
-        {
-          name: 'Alfonso Rios',
-          image: 'https://i.cdn.turner.com/adultswim/big/img/2018/01/09/RickMorty2_Marathon_2.jpg',
-          galaxy: 'Vía láctea',
-          planet: 'Tierra',
-          email: 'malforime@gmail.com'
-        },
-        {
-          name: 'Alfonso Rios',
-          image: 'https://i.cdn.turner.com/adultswim/big/img/2018/01/09/RickMorty2_Marathon_2.jpg',
-          galaxy: 'Vía láctea',
-          planet: 'Tierra',
-          email: 'malforime@gmail.com'
-        }
-      ];
-    }
+  constructor() {
+    super();
+    firebase.database().ref('users').on('value', snapshot => {
+      const payload = snapshot.val();
+      this.users = [];
+      for (const key in payload) {
+        const user = payload[key];
+        this.users = [...this.users, user];
+      }
+    });
+  }
 
-    _backPage(){
-      this.dispatchEvent(new CustomEvent('page-changed', {
-        detail: 'home'
-      }));
-    }
+  _backPage() {
+    this.dispatchEvent(new CustomEvent('page-changed', {
+      detail: 'home'
+    }));
+  }
 }
 
 window.customElements.define('info-page', InfoPage);
