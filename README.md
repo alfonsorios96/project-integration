@@ -1,7 +1,12 @@
-![project-integration screenshot](project-integration.png)
 # <project-integration>
 
 ![LitElement component](https://img.shields.io/badge/litElement-component-blue.svg)
+
+## Installation
+
+- Requires install node >= 8.x
+- Requires install polymer `npm i -g polymer-cli`
+- Requires install catsys `npm i -g catsys-cli`
 
 ## Usage
 

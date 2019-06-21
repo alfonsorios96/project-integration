@@ -7,7 +7,9 @@ class HomePage extends PageDM {
       return css`
         h2 {
           font-size: 32px;
-          text-align: center;
+          color: white;
+          position: absolute;
+          left: 40%;
         }
 
         .container {
@@ -25,12 +27,19 @@ class HomePage extends PageDM {
           background-color: rgb(121, 134, 203);
           color: white;
         }
+        
+        img {
+          margin-left: -15px;
+          margin-right: -15px;
+          margin-top: -15px;
+        }
       `;
     }
     render() {
       return html`
-      <h2>Rick And Morty</h2>
       <section class="container">
+        <img src="../../images/rickMorty.jpeg" alt="Rick and Morty">
+        <h2>Rick And Morty</h2>
         <div class="row">
           <paper-button @click="${this._changePage}" data-page="register">Registrar</paper-button>
           <paper-button @click="${this._changePage}" data-page="login">Modificar</paper-button>
